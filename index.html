@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday  🎉</title>
+  <link href="https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #bb1e29;
+      --secondary: #e0c3fc;
+      --accent: #ffb4c6;
+      --deep: #b39ddb;
+      --text: #3a2352;
+      --hero-gradient: linear-gradient(120deg, #ffd5ec 0%, #e0c3fc 100%);
+      --button-gradient: linear-gradient(90deg, #ffb4c6 0%, #b39ddb 100%);
+    }
+    body {
+      margin: 0;
+      font-family: 'Nunito', sans-serif;
+      background: var(--hero-gradient);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      background: rgba(255,255,255,0.7);
+      box-shadow: 0 2px 12px rgba(179,157,219,0.08);
+      z-index: 100;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0.6em 0;
+    }
+    nav a {
+      font-family: 'Nunito', sans-serif;
+      font-size: 1rem;
+      color: var(--deep);
+      text-decoration: none;
+      margin: 0 1.2em;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      transition: color 0.2s;
+    }
+    nav a:hover, nav a.active {
+      color: var(--accent);
+    }
+    .fireworks-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 2;
+    }
+    /* Section Titles Improvements */
+    section h2 {
+      text-transform: uppercase;
+      text-align: center;
+      font-size: 2.1rem;
+      font-family: 'Nunito', sans-serif;
+      letter-spacing: 0.06em;
+      color: var(--deep);
+      margin-top: 2.2rem;
+      margin-bottom: 1.2rem;
+    }
+    /* Hero Section */
+    #hero {
+      background: url('images/your-custom-photo.jpg') center/cover no-repeat, var(--hero-gradient);
+      min-height: 90vh;
+      padding-top: 4em;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    #hero .animated-hearts {
+      position: absolute;
+      right: 2vw;
+      top: 2vw;
+      font-size: 2.4rem;
+      animation: heartPulse 1.8s infinite;
+      z-index: 3;
+    }
+    @keyframes heartPulse {
+      0%,100%{transform:scale(1);}
+      50%{transform:scale(1.13);}
+    }
+    #hero h1 {
+      font-family: 'Nunito', sans-serif;
+      font-size: 2.6rem;
+      font-weight: 700;
+      color: var(--deep);
+      letter-spacing: 1px;
+      margin-bottom: 1.1rem;
+      margin-top: 2.2rem;
+      opacity: 0;
+      animation: fadeInDown 1.4s cubic-bezier(.57,1.48,.55,1) 0.1s forwards;
+      text-align: center;
+      text-transform: uppercase;
+      /* Center horizontally */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+    }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-24px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    #hero .subheading {
+      font-family: 'Nunito', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: var(--text);
+      background: rgba(255,255,255,0.18);
+      border-radius: 12px;
+      max-width: 530px;
+      margin: 0.6em auto 1.5em auto;
+      padding: 1em 1.4em;
+      line-height: 1.6;
+      letter-spacing: 0.02em;
+      opacity: 0;
+      animation: fadeInUp 1.6s cubic-bezier(.57,1.48,.55,1) 0.6s forwards;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    .primary-btn {
+      background: var(--button-gradient);
+      color: #fff;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 30px;
+      padding: 0.8rem 2rem;
+      box-shadow: 0 2px 14px rgba(255,180,198,0.16);
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 600;
+      margin-top: 1.3rem;
+    }
+    .primary-btn:hover {
+      transform: scale(1.07);
+      box-shadow: 0 4px 24px rgba(179,157,219,0.25);
+    }
+    /* Memories Section */
+    #memories {
+      background: linear-gradient(120deg, #ffd5ec 0%, #e0c3fc 100%);
+    }
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+      margin: 2rem 0 1rem 0;
+    }
+    .gallery-item {
+      position: relative;
+      max-width: 350px;
+      min-width: 250px;
+      flex: 1 1 320px;
+      cursor: pointer;
+      transition: box-shadow 0.3s;
+      box-shadow: 0 4px 24px rgba(224,195,252,0.10);
+      background: rgba(255,255,255,0.8);
+      border-radius: 18px;
+      overflow: hidden;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 340px;
+      object-fit: cover;
+      border-radius: 18px 18px 0 0;
+      display: block;
+      transition: transform 0.3s;
+    }
+    .gallery-item:focus {
+      outline: 2px solid var(--accent);
+    }
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+    .gallery-note {
+      font-family: 'Nunito', sans-serif;
+      font-size: 1.1rem;
+      color: var(--text);
+      padding: 0.7em 1em;
+      background: linear-gradient(90deg, rgba(179,157,219,0.15), rgba(255,180,198,0.13));
+      border-radius: 0 0 18px 18px;
+      text-align: center;
+      font-weight: 400;
+    }
+    /* Lightbox Styles */
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 99;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(58,35,82,0.92);
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.4s;
+      flex-direction: column;
+    }
+    .lightbox.active {
+      display: flex;
+      opacity: 1;
+    }
+    .lightbox img {
+      max-width: 80vw;
+      max-height: 70vh;
+      border-radius: 24px;
+      box-shadow: 0 8px 40px rgba(179,157,219,0.25);
+      transition: opacity 0.5s;
+      opacity: 1;
+    }
+    .lightbox .close, .lightbox .arrow {
+      position: absolute;
+      font-size: 2.8rem;
+      color: #ffd5ec;
+      cursor: pointer;
+      font-family: 'Nunito', sans-serif;
+      background: none;
+      border: none;
+      z-index: 1;
+      user-select: none;
+    }
+    .lightbox .close { top: 40px; right: 60px;}
+    .lightbox .arrow.left { left: 16vw; top: 50%; transform: translateY(-50%);}
+    .lightbox .arrow.right { right: 16vw; top: 50%; transform: translateY(-50%);}
+    .lightbox .caption {
+      color: #fff;
+      margin-top: 1em;
+      font-size: 1.13rem;
+      font-family: 'Nunito', sans-serif;
+      text-align: center;
+      background: rgba(0,0,0,0.16);
+      border-radius: 10px;
+      padding: 0.5em 1.1em;
+      max-width: 600px;
+    }
+    .lightbox .count {
+      color: #ffd5ec;
+      font-size: 1.07rem;
+      margin-top: 1.1em;
+      font-family: 'Nunito', sans-serif;
+      background: rgba(179,157,219,0.2);
+      border-radius: 7px;
+      padding: 0.25em 0.7em;
+    }
+    /* Video Section */
+    #video-section {
+      background: linear-gradient(110deg, #e0c3fc 0%, #ffd5ec 100%);
+      margin-bottom: 2rem;
+      min-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+    #video-section .video-container {
+      position: relative;
+      width: 92vw;
+      max-width: 800px;
+      margin: 1rem 0;
+      display: flex;
+      justify-content: center;
+      height: 600px;
+      align-items: center;
+    }
+    #video-section video {
+      width: 100%;
+      height: 100%;
+      border-radius: 24px;
+      box-shadow: 0 6px 28px rgba(179,157,219,0.10);
+      background: #fff;
+      outline: none;
+      object-fit: contain;
+    }
+    #video-section .play-overlay {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 3rem;
+      color: #ffd5ec;
+      background: rgba(224,195,252,0.20);
+      padding: 0.25em 0.45em;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      z-index: 10;
+      transition: background 0.3s;
+    }
+    #video-section .video-container:hover .play-overlay {
+      display: block;
+    }
+    #video-section .video-footer {
+      font-family: 'Nunito', sans-serif;
+      font-size: 1.15rem;
+      color: var(--deep);
+      margin-top: 1.4rem;
+      letter-spacing: 0.02em;
+    }
+    /* Message Section */
+    #message-section {
+      background: linear-gradient(120deg, #ffd5ec 0%, #e0c3fc 100%);
+      color: #fff;
+    }
+    .card {
+      background: rgba(255,255,255,0.88);
+      padding: 2rem 1.2rem;
+      margin: 1.5rem auto 1rem auto;
+      border-radius: 20px;
+      box-shadow: 0 4px 24px rgba(255,180,198,0.10);
+      max-width: 650px;
+      font-size: 1.2rem;
+      font-family: 'Nunito', sans-serif;
+      color: var(--text);
+      animation: fadeInUp 1s ease forwards;
+      opacity: 0;
+    }
+    /* Closing Section Improvements */
+    #closing {
+      background: linear-gradient(120deg, #e0c3fc 0%, #ffd5ec 100%);
+      color: #fff;
+      border-radius: 0 0 60px 60px;
+      overflow: hidden;
+      min-height: 40vh;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .footer {
+      margin-top: 2rem;
+      font-size: 1.6rem;
+      font-family: 'Nunito', sans-serif;
+      color: var(--deep);
+      letter-spacing: 0.04em;
+      text-align: center;
+      font-weight: 700;
+    }
+    .love-message {
+      margin-top: 1.3rem;
+      font-size: 1.3rem;
+      color: var(--accent);
+      font-family: 'Nunito', sans-serif;
+      text-align: center;
+      animation: fadeInLove 1.3s cubic-bezier(.57,1.48,.55,1) 0.8s forwards;
+      opacity: 0;
+      letter-spacing: 0.04em;
+      font-weight: 600;
+    }
+    @keyframes fadeInLove {
+      from { opacity: 0; transform: translateY(28px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    /* Balloons animation */
+    .balloon {
+      position: absolute;
+      bottom: -80px;
+      width: 56px;
+      height: 78px;
+      z-index: 10;
+      animation: balloonUp 5.5s cubic-bezier(.4,1.5,.55,1) infinite;
+    }
+    @keyframes balloonUp {
+      0% { bottom: -80px; opacity: 0.8; }
+      10% { opacity: 1;}
+      80% { opacity: 1;}
+      100% { bottom: 110vh; opacity: 0;}
+    }
+    .balloon svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    /* Floating confetti */
+    .confetti {
+      position: fixed;
+      pointer-events: none;
+      z-index: 50;
+      width: 1em;
+      height: 1em;
+      font-size: 1.1rem;
+      animation: confetti-float 3.5s linear infinite;
+    }
+    @keyframes confetti-float {
+      0% { opacity: 1; transform: translateY(-40px) scale(1);}
+      90% { opacity: 1;}
+      100% { opacity: 0; transform: translateY(120vh) scale(1.2);}
+    }
+    /* Responsive */
+    @media (max-width: 650px) {
+      nav { font-size: 0.9rem; padding: 0.35em 0;}
+      #hero h1 { font-size: 1.5rem;}
+      section h2 { font-size: 1.2rem;}
+      .gallery-item img { height: 170px;}
+      .card { font-size: 1rem;}
+      #video-section .video-container { max-width: 99vw; height: 300px;}
+      #video-section video { max-width: 99vw; height: 100%;}
+      .lightbox .arrow.left { left: 7vw;}
+      .lightbox .arrow.right { right: 7vw;}
+      .lightbox img { max-width: 97vw;}
+      .footer { font-size: 1.2rem;}
+      .love-message { font-size: 1rem;}
+    }
+  </style>
+</head>
+<body>
+  <!-- Fixed Navigation -->
+  <nav>
+    <a href="#hero" class="active">Home</a>
+    <a href="#memories">Memories</a>
+    <a href="#video-section">Video</a>
+    <a href="#message-section">Letter</a>
+    <a href="#closing">End</a>
+  </nav>
+  <!-- Fireworks Canvas -->
+  <canvas class="fireworks-canvas"></canvas>
+  <!-- Confetti Animation -->
+  <script>
+    function createConfetti() {
+      const confetti = document.createElement('span');
+      confetti.className = 'confetti';
+      confetti.innerHTML = ['🎉','💖','🌟','✨','💝','🥳'][Math.floor(Math.random()*6)];
+      confetti.style.left = Math.random() * 95 + 'vw';
+      confetti.style.top = -20 + 'px';
+      confetti.style.fontSize = (Math.random() * 1.2 + 1) + 'rem';
+      document.body.appendChild(confetti);
+      setTimeout(() => confetti.remove(), 3500);
+    }
+    setInterval(createConfetti, 600);
+  </script>
+  <!-- Hero Section -->
+  <section id="hero">
+    <span class="animated-hearts">❤️</span>
+    <h1>HAPPY BIRTHDAY LOVE 💖 </h1>
+    <div class="subheading">
+      You are the most beautiful part of my life, my constant reason to smile, and today I just want to remind you how deeply I love you. Happiest birthday, my love — this world is brighter because you’re in it.
+    </div>
+    <button class="primary-btn" onclick="toggleMusic()">🔊 Play/Pause Music</button>
+  </section> 
+  <!-- Memories Section -->
+  <section id="memories">
+    <h2>OUR BEAUTIFUL MEMORIES 📸</h2>
+    <div class="gallery">
+      <div class="gallery-item" tabindex="0" onclick="openLightbox(0)">
+        <img src="imageshero.jpg.jpg" alt="Ishika smiling" />
+        <div class="gallery-note">Your smile lights up my world ❤️</div>
+      </div>
+      <div class="gallery-item" tabindex="0" onclick="openLightbox(1)">
+        <img src="Snapchat-857806742.jpg" alt="Favorite person together" />
+        <div class="gallery-note">Forever my favorite person 💖</div>
+      </div>
+      <div class="gallery-item" tabindex="0" onclick="openLightbox(2)">
+        <img src="WhatsApp Image 2025-09-23 at 4.54.49 PM.jpeg" alt="Laughing together" />
+        <div class="gallery-note">Every laugh, every hug, every moment ✨</div>
+      </div>
+      <div class="gallery-item" tabindex="0" onclick="openLightbox(3)">
+        <img src="Snapchat-48609654.jpg" alt="Adventuring together" />
+        <div class="gallery-note">With you, life is an adventure 🌍</div>
+      </div>
+      <div class="gallery-item" tabindex="0" onclick="openLightbox(4)">
+        <img src="WhatsApp Image 2025-09-23 at 4.55.31 PM.jpeg" alt="Dream come true" />
+        <div class="gallery-note">You are my dream come true 💫</div>
+      </div>
+    </div>
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+      <button class="close" onclick="closeLightbox()" aria-label="Close">&times;</button>
+      <button class="arrow left" onclick="prevPhoto()" aria-label="Previous Photo">&#8592;</button>
+      <img id="lightbox-img" src="" alt="Large Memory">
+      <button class="arrow right" onclick="nextPhoto()" aria-label="Next Photo">&#8594;</button>
+      <div class="caption" id="lightbox-caption"></div>
+      <div class="count" id="lightbox-count"></div>
+    </div>
+  </section>
+  <!-- Video Section -->
+  <section id="video-section">
+    <h2>HERE’S SOMETHING FOR YOU, LOVE 🎥</h2>
+    <div class="video-container">
+      <video id="ishika-video" controls poster="images/video-poster.jpg" tabindex="0">
+        <source src="video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <span class="play-overlay" onclick="playVideo()">▶️</span>
+    </div>
+    <div class="video-footer">Made with love my (SAIYARAA) </div>
+  </section>
+  <!-- Message Section -->
+  <section id="message-section">
+    <h2>SOME WORDS FOR YOU 💌</h2>
+    <div class="card">
+      🌸 Happy Birthday, My Love Ishika ❤️ 🌸,<br><br>
+
+It still feels unreal how destiny brought us together. The first time we met was so unexpected — in the HAP lab, when my leg touched yours by accident. I didn’t even realize it then. The second time, in the auditorium, it happened again — my leg brushed yours, and being my shy self, I just mumbled a sorry without even looking at you and walked away. I never thought those small accidents would lead to the most beautiful part of my life.
+
+Then, out of nowhere, you added me on Instagram, and that’s where it all began. We started talking, laughing, and connecting over the smallest things. You used to call me babie back then, and those words are still carved in my heart. Slowly, our chats turned into calls, then video calls, where I would sing for you with my guitar — and I loved how you adored my songs, my smile, my voice, even my little things like my Adam’s apple.
+
+And just like that, months flew by. It’s been 9 months already, and every single moment with you has been nothing short of magic. Time feels faster when I’m with you, and slower when we’re apart. We crave each other’s presence, and that’s what makes our bond so special.
+
+Today, on your birthday, I just want to tell you — my life truly started when you walked into it. You are my greatest blessing, my happiness, my forever love. I can’t wait to create countless more memories with you, hand in hand, heart to heart.
+
+✨ Happy Birthday, Ishika ❤️ You’re not just my girlfriend, you’re my everything. ✨ ❤️
+    </div>
+  </section>
+  <!-- Closing Section -->
+  <section id="closing">
+    <div class="footer">
+      FOREVER YOURS, UTSAV
+    </div>
+    <div class="love-message">
+      I love you forever 💗
+    </div>
+    <!-- Balloons (SVGs for colors) -->
+    <div class="balloon" style="left: 20%; animation-delay:0s;">
+      <svg viewBox="0 0 56 78">
+        <ellipse cx="28" cy="38" rx="22" ry="34" fill="#ffd5ec"/>
+        <rect x="25" y="72" width="6" height="6" fill="#b39ddb"/>
+      </svg>
+    </div>
+    <div class="balloon" style="left: 50%; animation-delay:1.2s;">
+      <svg viewBox="0 0 56 78">
+        <ellipse cx="28" cy="38" rx="22" ry="34" fill="#e0c3fc"/>
+        <rect x="25" y="72" width="6" height="6" fill="#ffb4c6"/>
+      </svg>
+    </div>
+    <div class="balloon" style="left: 75%; animation-delay:2.1s;">
+      <svg viewBox="0 0 56 78">
+        <ellipse cx="28" cy="38" rx="22" ry="34" fill="#b39ddb"/>
+        <rect x="25" y="72" width="6" height="6" fill="#ffd5ec"/>
+      </svg>
+    </div>
+  </section>
+  <!-- Background Music -->
+  <audio id="bg-music" autoplay loop>
+    <source src="Audio Spectrum (No Copyright)  Sanam Teri Kasam Bgm  itunemachine.mp3" type="audio/mp3">
+  </audio>
+  <script>
+    // Music toggle
+    const music = document.getElementById('bg-music');
+    function toggleMusic() {
+      if (music.paused) music.play();
+      else music.pause();
+    }
+    // Navbar smooth scroll and active link
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', function(e){
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        window.scrollTo({top: target.offsetTop-60, behavior:'smooth'});
+      });
+    });
+    window.addEventListener('scroll', () => {
+      const fromTop = window.scrollY + 70;
+      document.querySelectorAll('section').forEach((section, i) => {
+        const navLinks = document.querySelectorAll('nav a');
+        if (section.offsetTop <= fromTop && section.offsetTop + section.offsetHeight > fromTop) {
+          navLinks.forEach(l => l.classList.remove('active'));
+          navLinks[i].classList.add('active');
+        }
+      });
+    });
+    // Animate card message section
+    window.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        document.querySelector('#message-section .card').style.opacity = 1;
+      }, 400);
+      // Animate love message in closing section
+      setTimeout(() => {
+        document.querySelector('.love-message').style.opacity = 1;
+      }, 600);
+    });
+    // Reveal on scroll (fade/slide in backgrounds)
+    const sections = document.querySelectorAll('section');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15 });
+    sections.forEach(section => {
+      observer.observe(section);
+    });
+    // Fireworks Animation in all sections
+    const canvas = document.querySelector('.fireworks-canvas');
+    const ctx = canvas.getContext('2d');
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+    let fireworks = [];
+    class Firework {
+      constructor(x, y, color) {
+        this.x = x;
+        this.y = y;
+        this.color = color;
+        this.particles = [];
+        for (let i = 0; i < 60; i++) {
+          const angle = (2 * Math.PI * i) / 60;
+          const speed = Math.random() * 2.5 + 1.7;
+          this.particles.push({
+            x: x,
+            y: y,
+            dx: Math.cos(angle) * speed,
+            dy: Math.sin(angle) * speed,
+            life: 120
+          });
+        }
+      }
+      draw() {
+        this.particles.forEach(p => {
+          ctx.fillStyle = this.color;
+          ctx.globalAlpha = Math.max(p.life/120, 0.4);
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, 2.6, 0, 2 * Math.PI);
+          ctx.fill();
+          p.x += p.dx;
+          p.y += p.dy;
+          p.dy += 0.06;
+          p.life--;
+        });
+        ctx.globalAlpha = 1;
+      }
+    }
+    function animateFireworks() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      fireworks.forEach((fw, i) => {
+        fw.draw();
+        fw.particles = fw.particles.filter(p => p.life > 0);
+        if (fw.particles.length === 0) fireworks.splice(i, 1);
+      });
+      requestAnimationFrame(animateFireworks);
+    }
+    setInterval(() => {
+      const x = Math.random() * canvas.width * 0.85 + canvas.width * 0.07;
+      const y = Math.random() * canvas.height * 0.5 + canvas.height * 0.15;
+      const color = `hsl(${Math.random()*360}, 95%, 65%)`;
+      fireworks.push(new Firework(x, y, color));
+    }, 1100);
+    animateFireworks();
+    // Lightbox logic with arrows and keyboard
+    const photoSources = [
+      "images/photo1.jpg",
+      "images/photo2.jpg",
+      "images/photo3.jpg",
+      "images/photo4.jpg",
+      "images/photo5.jpg"
+    ];
+    const photoCaptions = [
+      "Your smile lights up my world ❤️",
+      "Forever my favorite person 💖",
+      "Every laugh, every hug, every moment ✨",
+      "With you, life is an adventure 🌍",
+      "You are my dream come true 💫"
+    ];
+    let currentPhoto = 0;
+    function openLightbox(idx) {
+      currentPhoto = idx;
+      showPhoto();
+      document.getElementById('lightbox').classList.add('active');
+      document.getElementById('lightbox-img').focus();
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+      document.getElementById('lightbox-img').src = "";
+    }
+    function showPhoto() {
+      const img = document.getElementById('lightbox-img');
+      img.style.opacity = 0.6;
+      setTimeout(() => {
+        img.src = photoSources[currentPhoto];
+        document.getElementById('lightbox-caption').textContent = photoCaptions[currentPhoto];
+        document.getElementById('lightbox-count').textContent = `Photo ${currentPhoto+1} of ${photoSources.length}`;
+        img.style.opacity = 1;
+      }, 150);
+    }
+    function prevPhoto() {
+      currentPhoto = (currentPhoto - 1 + photoSources.length) % photoSources.length;
+      showPhoto();
+    }
+    function nextPhoto() {
+      currentPhoto = (currentPhoto + 1) % photoSources.length;
+      showPhoto();
+    }
+    document.addEventListener('keydown', function(e){
+      const box = document.getElementById('lightbox');
+      if(!box.classList.contains('active')) return;
+      if(e.key === "Escape") closeLightbox();
+      if(e.key === "ArrowLeft") prevPhoto();
+      if(e.key === "ArrowRight") nextPhoto();
+    });
+    // Video overlay play
+    function playVideo() {
+      document.getElementById('ishika-video').play();
+    }
+  </script>
+</body>
+</html>

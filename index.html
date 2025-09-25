@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday Love 🎉</title>
+  <link rel="preload" href="images/hero.jpg" as="image">
+  <link rel="preload" href="video.mp4" as="video">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #bb1e29;
+      --secondary: #e0c3fc;
+      --accent: #ffb4c6;
+      --deep: #b39ddb;
+      --text: #3a2352;
+      --hero-gradient: linear-gradient(120deg, #ffd5ec 0%, #e0c3fc 100%);
+      --button-gradient: linear-gradient(90deg, #ffb4c6 0%, #b39ddb 100%);
+    }
+    body {
+      margin: 0;
+      font-family: 'Nunito', sans-serif;
+      background: var(--hero-gradient);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      background: rgba(255,255,255,0.7);
+      box-shadow: 0 2px 12px rgba(179,157,219,0.08);
+      z-index: 100;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0.6em 0;
+    }
+    nav a {
+      font-family: 'Nunito', sans-serif;
+      font-size: 1rem;
+      color: var(--deep);
+      text-decoration: none;
+      margin: 0 1.2em;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      transition: color 0.2s;
+    }
+    nav a:hover, nav a.active {
+      color: var(--accent);
+    }
+    .fireworks-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 2;
+    }
+    section h2 {
+      text-transform: uppercase;
+      text-align: center;
+      font-size: 2.1rem;
+      font-family: 'Nunito', sans-serif;
+      letter-spacing: 0.06em;
+      color: var(--deep);
+      margin-top: 2.2rem;
+      margin-bottom: 1.2rem;
+    }
+    #hero {
+      background: url('images/your-custom-photo.jpg') center/cover no-repeat, var(--hero-gradient);
+      min-height: 90vh;
+      padding-top: 4em;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    #hero .animated-hearts {
+      position: absolute;
+      right: 2vw;
+      top: 2vw;
+      font-size: 2.4rem;
+      animation: heartPulse 1.8s infinite;
+      z-index: 3;
+    }
+    @keyframes heartPulse {
+      0%,100%{transform:scale(1);}
+      50%{transform:scale(1.13);}
+    }
+    #hero h1 {
+      font-family: 'Nunito', sans-serif;
+      font-size: 2.6rem;
+      font-weight: 700;
+      color: var(--deep);
+      letter-spacing: 1px;
+      margin-bottom: 1.1rem;
+      margin-top: 2.2rem;
+      opacity: 0;
+      animation: fadeInDown 1.4s cubic-bezier(.57,1.48,.55,1) 0.1s forwards;
+      text-align: center;
+      text-transform: uppercase;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+    }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-24px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    #hero .subheading {
+      font-family: 'Nunito', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: var(--text);
+      background: rgba(255,255,255,0.18);
+      border-radius: 12px;
+      max-width: 530px;
+      margin: 0.6em auto 1.5em auto;
+      padding: 1em 1.4em;
+      line-height: 1.6;
+      letter-spacing: 0.02em;
+      opacity: 0;
+      animation: fadeInUp 1.6s cubic-bezier(.57,1.48,.55,1) 0.6s forwards;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    .primary-btn {
+      background: var(--button-gradient);
+      color: #fff;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 30px;
+      padding: 0.8rem 2rem;
+      box-shadow: 0 2px 14px rgba(255,180,198,0.16);
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 600;
+      margin-top: 1.3rem;
+    }
+    .primary-btn:hover {
+      transform: scale(1.07);
+      box-shadow: 0 4px 24px rgba(179,157,219,0.25);
+    }
+    #our-journey {
+      background: linear-gradient(120deg, #ffd5ec 0%, #e0c3fc 100%);
+      padding: 2rem 0;
+      min-height: 70vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .journey-container {
+      display: flex;
+      max-width: 1200px;
+      width: 90%;
+      gap: 2rem;
+      margin-left: 5%; /* Push content slightly left */
+    }
+    .journey-images {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .journey-image {
+      width: 200px;
+      height: 200px;
+      border: 2px solid var(--deep);
+      box-shadow: 0 4px 12px rgba(179,157,219,0.2);
+      border-radius: 10px;
+      overflow: hidden;
+      opacity: 0;
+      animation: fadeInUp 1.2s ease forwards 0.3s;
+    }
+    .journey-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .journey-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .journey-card {
+      background: rgba(255,255,255,0.8);
+      padding: 1.5rem;
+      border: 2px solid var(--deep);
+      box-shadow: 0 4px 12px rgba(179,157,219,0.2);
+      border-radius: 10px;
+      height: 150px;
+      opacity: 0;
+      animation: fadeInUp 1.2s ease forwards 0.5s;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.9rem;
+      color: var(--text);
+      line-height: 1.2;
+    }
+    #memories {
+      background: linear-gradient(120deg, #ffd5ec 0%, #e0c3fc 100%);
+      padding: 2rem 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .kitkat-container {
+      text-align: center;
+      cursor: pointer;
+    }
+    .kitkat-image {
+      width: 400px;
+      height: auto;
+      margin-bottom: 1rem;
+    }
+    .kitkat-message {
+      font-size: 1.2rem;
+      color: var(--deep);
+      font-weight: 600;
+    }
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 99;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(58,35,82,0.92);
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.4s;
+      flex-direction: column;
+    }
+    .lightbox.active {
+      display: flex;
+      opacity: 1;
+    }
+    .lightbox img {
+      max-width: 80vw;
+      max-height: 70vh;
+      border-radius: 24px;
+      box-shadow: 0 8px 40px rgba(179,157,219,0.25);
+      transition: opacity 0.5s;
+      opacity: 1;
+    }
+    .lightbox .close, .lightbox .arrow {
+      position: absolute;
+      font-size: 2.8rem;
+      color: #ffd5ec;
+      cursor: pointer;
+      font-family: 'Nunito', sans-serif;
+      background: none;
+      border: none;
+      z-index: 1;
+      user-select: none;
+    }
+    .lightbox .close { top: 40px; right: 60px;}
+    .lightbox .arrow.left { left: 16vw; top: 50%; transform: translateY(-50%);}
+    .lightbox .arrow.right { right: 16vw; top: 50%; transform: translateY(-50%);}
+    .lightbox .caption {
+      color: #fff;
+      margin-top: 1em;
+      font-size: 1.13rem;
+      font-family: 'Nunito', sans-serif;
+      text-align: center;
+      background: rgba(0,0,0,0.16);
+      border-radius: 10px;
+      padding: 0.5em 1.1em;
+      max-width: 600px;
+    }
+    .lightbox .count {
+      color: #ffd5ec;
+      font-size: 1.07rem;
+      margin-top: 1.1em;
+      font-family: 'Nunito', sans-serif;
+      background: rgba(179,157,219,0.2);
+      border-radius: 7px;
+      padding: 0.25em 0.7em;
+    }
+    @media (max-width: 650px) {
+      .lightbox .arrow.left { left: 2vw; }
+      .lightbox .arrow.right { right: 2vw; }
+    }
+    #video-section {
+      background: linear-gradient(110deg, #e0c3fc 0%, #ffd5ec 100%);
+      margin-bottom: 2rem;
+      min-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+    #video-section .video-container {
+      position: relative;
+      width: 92vw;
+      max-width: 800px;
+      margin: 1rem 0;
+      display: flex;
+      justify-content: center;
+      height: 600px;
+      align-items: center;
+    }
+    #video-section video {
+      width: 100%;
+      height: 100%;
+      border-radius: 24px;
+      box-shadow: 0 6px 28px rgba(179,157,219,0.10);
+      background: #fff;
+      outline: none;
+      object-fit: contain;
+    }
+    #video-section .play-overlay {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 3rem;
+      color: #ffd5ec;
+      background: rgba(224,195,252,0.20);
+      padding: 0.25em 0.45em;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      z-index: 10;
+      transition: background 0.3s;
+    }
+    #video-section .video-container:hover .play-overlay {
+      display: block;
+    }
+    #video-section .video-footer {
+      font-family: 'Nunito', sans-serif;
+      font-size: 1.15rem;
+      color: var(--deep);
+      margin-top: 1.4rem;
+      letter-spacing: 0.02em;
+    }
+    #message-section {
+      background: linear-gradient(120deg, #ffd5ec 0%, #e0c3fc 100%);
+      color: #fff;
+    }
+    .card {
+      background: rgba(255,255,255,0.88);
+      padding: 2rem 1.2rem;
+      margin: 1.5rem auto 1rem auto;
+      border-radius: 20px;
+      box-shadow: 0 4px 24px rgba(255,180,198,0.10);
+      max-width: 650px;
+      font-size: 1.2rem;
+      font-family: 'Nunito', sans-serif;
+      color: var(--text);
+      animation: fadeInUp 1s ease forwards;
+      opacity: 0;
+    }
+    #closing {
+      background: linear-gradient(120deg, #e0c3fc 0%, #ffd5ec 100%);
+      color: #fff;
+      border-radius: 0 0 60px 60px;
+      overflow: hidden;
+      min-height: 40vh;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .footer {
+      margin-top: 2rem;
+      font-size: 1.6rem;
+      font-family: 'Nunito', sans-serif;
+      color: var(--deep);
+      letter-spacing: 0.04em;
+      text-align: center;
+      font-weight: 700;
+    }
+    .love-message {
+      margin-top: 1.3rem;
+      font-size: 1.3rem;
+      color: var(--accent);
+      font-family: 'Nunito', sans-serif;
+      text-align: center;
+      animation: fadeInLove 1.3s cubic-bezier(.57,1.48,.55,1) 0.8s forwards;
+      opacity: 0;
+      letter-spacing: 0.04em;
+      font-weight: 600;
+    }
+    @keyframes fadeInLove {
+      from { opacity: 0; transform: translateY(28px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    .balloon {
+      position: absolute;
+      bottom: -80px;
+      width: 56px;
+      height: 78px;
+      z-index: 10;
+      animation: balloonUp 5.5s cubic-bezier(.4,1.5,.55,1) infinite;
+    }
+    @keyframes balloonUp {
+      0% { bottom: -80px; opacity: 0.8; }
+      10% { opacity: 1;}
+      80% { opacity: 1;}
+      100% { bottom: 110vh; opacity: 0;}
+    }
+    .balloon svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .confetti {
+      position: fixed;
+      pointer-events: none;
+      z-index: 50;
+      width: 1em;
+      height: 1em;
+      font-size: 1.1rem;
+      animation: confetti-float 3.5s linear infinite;
+    }
+    @keyframes confetti-float {
+      0% { opacity: 1; transform: translateY(-40px) scale(1);}
+      90% { opacity: 1;}
+      100% { opacity: 0; transform: translateY(120vh) scale(1.2);}
+    }
+    @media (max-width: 650px) {
+      nav { font-size: 0.9rem; padding: 0.35em 0;}
+      #hero h1 { font-size: 1.5rem;}
+      section h2 { font-size: 1.2rem;}
+      .card { font-size: 1rem;}
+      #video-section .video-container { max-width: 99vw; height: 300px;}
+      #video-section video { max-width: 99vw; height: 100%;}
+      .lightbox img { max-width: 97vw;}
+      .footer { font-size: 1.2rem;}
+      .love-message { font-size: 1rem;}
+      .journey-image { width: 150px; height: 150px; }
+      .journey-card { height: 120px; }
+      .kitkat-image { width: 300px; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="#hero" class="active">Home</a>
+    <a href="#our-journey">Our Journey</a>
+    <a href="#memories">Memories</a>
+    <a href="#video-section">Video</a>
+    <a href="#message-section">Letter</a>
+    <a href="#closing">End</a>
+  </nav>
+  <canvas class="fireworks-canvas" aria-label="Decorative fireworks animation"></canvas>
+  <script>
+    function createConfetti() {
+      const confetti = document.createElement('span');
+      confetti.className = 'confetti';
+      confetti.innerHTML = ['🎉','💖','🌟','✨','💝','🥳'][Math.floor(Math.random()*6)];
+      confetti.style.left = Math.random() * 95 + 'vw';
+      confetti.style.top = -20 + 'px';
+      confetti.style.fontSize = (Math.random() * 1.2 + 1) + 'rem';
+      document.body.appendChild(confetti);
+      setTimeout(() => confetti.remove(), 3500);
+    }
+    setInterval(createConfetti, 800);
+  </script>
+  <section id="hero">
+    <span class="animated-hearts">❤️</span>
+    <h1>HAPPY BIRTHDAY LOVE 💖</h1>
+    <div class="subheading">
+    To the Girl who is the most beautiful part of my entire existence, my constant, undeniable reason to smile: this entire space is made with all my love for you, Ishika Bhatnagar. Every moment we've shared, from our first awkward "sorry" to the future we're writing together, is a testament to the light you bring to my world. I just want to remind you, on this perfect day, how deeply and completely I love you. Happiest Birthday, my love — this world is not just brighter, it is meaningful because you are here..
+    </div>
+    <button class="primary-btn" onclick="toggleMusic()">🔊 Play Music</button>
+  </section> 
+  <section id="our-journey">
+    <h2>OUR JOURNEY 📸❤️</h2>
+    <div class="journey-container">
+      <div class="journey-images">
+        <div class="journey-image"><img src="j1 image.jpeg" alt="Journey moment 1"></div>
+        <div class="journey-image"><img src="j2 image.jpeg" alt="Journey moment 2"></div>
+        <div class="journey-image"><img src="J3.jpeg" alt="Journey moment 3"></div>
+        <div class="journey-image"><img src="j4 image.jpeg" alt="Journey moment 4"></div>
+        <div class="journey-image"><img src="j5 image.jpeg" alt="Journey moment 5"></div>
+        <div class="journey-image"><img src="j6 (1).jpeg" alt="Journey moment 6"></div>
+        <div class="journey-image"><img src="j7.jpeg" alt="Journey moment 7"></div>
+      </div>
+      <div class="journey-content">
+        <div class="journey-card">I'll never forget how our story started.I was sitting across from you, Ishika, in the HAP lab. I had no idea you were even looking at me! My leg kept hitting yours under the table, first once, then twice, and a third time, until I finally realized what was happening. My rushed "sorry" 🥺 was the first thing I ever said to you. Then we met again in the college auditorium. My leg accidentally touched yours again! 🤦‍♂️ This time I just got super shy 😳. I quickly said sorry without even looking at you and rushed away. When I look back, those small, clumsy leg bumps and whispered apologies were the funny, sweet start of everything. It makes me smile to know that our first real steps toward each other were just our feet meeting under a table. 💖.</div>
+        <div class="journey-card">Our first official meet-up, after all those calls, started out so stiff, but watching Yeh Jawaani Hai Deewani soon melted the tension. I loved watching you try to hold back your laughter when I made my lame jokes. Trying to hold your hand felt so awkward at first, but making you laugh again and When I nervously joked, "You won't hit me, right?"—"Zyada kiya toh ho sakta hai"—made me pause and just look at you. That's when everything shifted. I was noticing you in a way that wasn't just friendly; I felt my heart skip a beat. Suddenly, you looked breathtakingly pretty, and I wondered if it was the light from the screen or just the simple fact that you were you. It was the way the light caught your glasses, making you shine, and I realized I didn't care that I usually didn't like girls in glasses—you just looked perfect. I was so confused by the intensity of what I was feeling! Later, over our long talk at McDonald's, the surprise spark of jealousy I felt when Abhishek called proved to me that something real and deep was beginning. That powerful moment of noticing you is sealed forever in the picture I took that day, a memory I will never, ever delete. ✨.</div>
+        <div class="journey-card">This picture perfectly captures the sweet tension of our second movie date. We went for food afterward, and the whole time we were getting to know each other more deeply—sharing laughs and opening up. In that lovely moment, I knew I had to keep it, so I quietly took out my phone to snap this image. And just like that, you became shy all over again, Ishika. That slight pull-back, the gentle look away—it’s the most endearing thing about you. You were shy because I was clicking the picture, but for me, that shyness only made you look more beautiful. This is more than just a photo; it’s a treasured memory of the day we truly started to connect, and the moment I realized how much I adore your sweet, shy heart. .</div>
+        <div class="journey-card">This place, right here, is where our college story truly came alive. It's not just a spot on campus; it’s the corner where we sat a hundred times, letting the hours slip away. It's where we talked about everything and nothing, where I would watch you, Ishika, still shy in a way I absolutely adore, even while laughing at one of my silly jokes. For me, it was always a chance to share the thoughts and heart-chats that I couldn't share with anyone else. I cherish the memory of your quiet shyness contrasting with my need to tease and make you smile. Every conversation we had there, every walk from the building to the ground and back, is one of the bestest memories I’ll ever have. Sometimes, I just close my eyes and wish I could rewind time to that exact moment, just to sit there with you again, sharing everything, laughing with you, and holding onto that feeling forever. That corner is where I first truly knew you, and it’s a feeling I’ll always carry. 💖.</div>
+        <div class="journey-card">This picture from Asita Park marks a truly special day—our first time meeting in Delhi! I remember that park, DDA Park, as a little oasis where we could finally talk for hours without a single interruption. We just laughed, sharing all our memories from the very beginning, letting our presence simply fill the space around us. We sat there, just holding hands, enjoying the view like it was our own personal picnic spot. Even though you kept saying, "Bhai, garmi bahut hai," your willingness to stay by my side meant the world to me. And of course, there were the calls from aunty ji, and your classic lines, "Aree, agaye, bas nikal gaye, pohoch gaye!" as we tried to squeeze out every last minute together. It’s a memory I hold so dear. I truly wish we could visit that park again someday, Ishika, and just sit exactly like this, lost in conversation and each other's company. ✨.</div>
+        <div class="journey-card">These festival days weren't just events; they were the precious days where our bond deepened under the rush of joy and shared success. I remember the immense pride I felt watching you take your prizes, and the raw, honest moment we ended up crying together, facing the difficult reality of the distance ahead. Every shared meal, every glance, every picture we clicked became an intense memory, a deliberate attempt to capture the feeling of being completely and utterly present with you. More than anything, I long to step back into that time: to spend a full day with you again, to watch you shine, to share those tears and that laughter, and to just make memories with you again—memories that will forever define the best part of my college life. That feeling of closeness, Ishika, I hold it in my heart.💝</div>
+        <div class="journey-card">This photo, taken on my final college day, perfectly captures the exact moment I realized I was leaving with the most important memory of all: you. I am eternally grateful to you, Ishika, for making my 8th semester the absolute best. You were the one who always made me smile, the one I needed the most. I may not have said "thanks" enough, but please know I was—and always will be—grateful for your incredible presence. Even as I passed out, the only thing filling my mind was always you.That’s why, in the middle of the night at 4 AM, I was writing that note for you. I was crying, unable to hide the fear of being distanced from you, but I had to be strong for us both. Thank you for everything, my Love. While a part of me wishes for another life where we could meet and write our journey exactly as we want, sitting in the same class, I truly believe we are going to write our upcoming life like we want—you and I, together. This is the enduring promise of our college journey. ❤️</div>
+      </div>
+    </div>
+  </section>
+  <section id="memories">
+    <h2>OUR BEAUTIFUL MEMORIES 📸</h2>
+    <div class="kitkat-container" onclick="openLightbox(0); burstCelebration();">
+      <img class="kitkat-image" src="https://www.pngkey.com/png/detail/213-2131385_kitkat-png-chocolate-kit-kat-png.png" alt="KitKat Chocolate Bar">
+      <p class="kitkat-message">Tap the KitKat</p>
+    </div>
+    <div class="lightbox" id="lightbox">
+      <button class="close" onclick="closeLightbox()" aria-label="Close">&times;</button>
+      <button class="arrow left" onclick="prevPhoto()" aria-label="Previous Photo">&#8592;</button>
+      <img id="lightbox-img" src="" alt="Large Memory">
+      <button class="arrow right" onclick="nextPhoto()" aria-label="Next Photo">&#8594;</button>
+      <div class="caption" id="lightbox-caption"></div>
+      <div class="count" id="lightbox-count"></div>
+    </div>
+  </section>
+  <section id="video-section">
+    <h2>HERE’S SOMETHING FOR YOU, LOVE 🎥</h2>
+    <div class="video-container">
+      <video id="ishika-video" controls poster="images/video-poster.jpg" tabindex="0">
+        <source src="video.mp4" type="video/mp4">
+        <track src="captions.vtt" kind="captions" srclang="en" label="English">
+        Your browser does not support the video tag.
+      </video>
+      <span class="play-overlay" onclick="playVideo()">▶️</span>
+    </div>
+    <div class="video-footer">Made with love my (SAIYARAA)</div>
+  </section>
+  <section id="message-section">
+    <h2>SOME WORDS FOR YOU 💌</h2>
+    <div class="card">
+      🌸, Happy Birthday, My Sweetest Ishika 🌸✨❤️,<br><br>
+
+Happy Birthday, my love! 🎉 Today, my heart is so full of love and happiness just thinking about you, the one who makes every day feel like a dream come true 😍💖. You’re not just my girlfriend—you’re my everything, my best friend, my joy, and the person who makes my world shine brighter than a million stars 🌟. From the very first moment we bumped into each other—those funny, clumsy moments filled with shy apologies and nervous giggles 😳😄—I knew there was something special about you. Every single second we’ve spent together is like a treasure I keep locked in my heart forever 💝.
+
+It all started with those little chats, laughing over the silliest things, when you called me "Barbie" 🥰. Those words still make my heart skip a beat, like they’re carved there forever 💘. Our talks turned into late-night calls, then video calls where I’d grab my guitar and sing for you 🎶🎸. I loved how your eyes lit up, how you adored my songs, my goofy smile, my voice, and even the tiniest things like my Adam’s apple 😅. You made me feel so special, so seen, and so loved. Nine months have flown by like a whirlwind 🌪️, and every moment with you feels like pure magic ✨. When we’re together, time races by so fast, but when we’re apart, it feels like forever ⏳💔. That’s how much I crave being with you, Ishika—you make every second better.
+
+I can still picture our first movie date 🎥, watching you laugh at my silly jokes, the way the light caught your glasses and made you glow like an angel 😇. That moment, when I snapped a picture of your shy smile 📸, is one I’ll never delete—it’s you, perfect in every way 🌹. Your soft giggles, our long talks about everything and nothing, and the way you make my heart feel so full are gifts I’ll always cherish 🎁. Even when things got tough, when we faced the fear of being apart and cried together 😢, you were my strength, my safe place, my home 🏡. I remember writing to you at 4 AM, tears streaming down my face ✍️, promising that we’d build our future together. I meant every word, and I still do, with every single beat of my heart 💓.
+
+We’ve shared so many beautiful moments—holding hands, laughing until our stomachs hurt, and just being us 🤝😄. The way we crave each other’s presence, the way we fit so perfectly together, makes our bond so special, so rare 🌈. You’ve changed my life in ways I can’t even explain. Before you, I didn’t know what it felt like to have someone who means everything to me. You walked into my life, and suddenly, everything made sense 🚪💞. You’re my greatest blessing, my happiness, the love of my life 😍. I’m so grateful for you, for the way you make me smile, for the way you make every day feel like an adventure.
+
+Today, on your birthday, I want you to know that you’re my forever love ❤️. I dream of all the memories we’ll create—more laughs, more songs, more moments where it’s just you and me, hand in hand, heart to heart 💕. I can’t wait to see you shine even brighter, to share every happy and crazy moment with you, and to keep building our story together 🌟. Happy Birthday, my Ishika 🎂✨—you’re not just my girlfriend, you’re my whole world, and I love you more than words can ever say 🥰💌. Here’s to you, to us, and to all the love we’ll share forever! 🎈
+
+With all my love, always and forever,
+💖🌹 ✨ ❤️
+    </div>
+  </section>
+  <section id="closing">
+    <div class="footer">
+      FOREVER YOURS, UTSAV
+    </div>
+    <div class="love-message">
+      I love you forever 💗
+    </div>
+    <div class="balloon" style="left: 20%; animation-delay:0s;">
+      <svg viewBox="0 0 56 78">
+        <ellipse cx="28" cy="38" rx="22" ry="34" fill="#ffd5ec"/>
+        <rect x="25" y="72" width="6" height="6" fill="#b39ddb"/>
+      </svg>
+    </div>
+    <div class="balloon" style="left: 50%; animation-delay:1.2s;">
+      <svg viewBox="0 0 56 78">
+        <ellipse cx="28" cy="38" rx="22" ry="34" fill="#e0c3fc"/>
+        <rect x="25" y="72" width="6" height="6" fill="#ffb4c6"/>
+      </svg>
+    </div>
+    <div class="balloon" style="left: 75%; animation-delay:2.1s;">
+      <svg viewBox="0 0 56 78">
+        <ellipse cx="28" cy="38" rx="22" ry="34" fill="#b39ddb"/>
+        <rect x="25" y="72" width="6" height="6" fill="#ffd5ec"/>
+      </svg>
+    </div>
+  </section>
+  <audio id="bg-music" loop>
+    <source src="Audio Spectrum (No Copyright)  Sanam Teri Kasam Bgm  itunemachine.mp3" type="audio/mp3">
+  </audio>
+  <script>
+    const music = document.getElementById('bg-music');
+    music.play().catch(() => {
+      console.log('Autoplay blocked. User interaction required.');
+      document.querySelector('.primary-btn').textContent = '🔊 Play Music';
+    });
+    function toggleMusic() {
+      if (music.paused) {
+        music.play();
+        document.querySelector('.primary-btn').textContent = '🔊 Pause Music';
+      } else {
+        music.pause();
+        document.querySelector('.primary-btn').textContent = '🔊 Play Music';
+      }
+    }
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', function(e){
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        window.scrollTo({top: target.offsetTop-60, behavior:'smooth'});
+      });
+    });
+    window.addEventListener('scroll', () => {
+      const fromTop = window.scrollY + 70;
+      document.querySelectorAll('section').forEach((section, i) => {
+        const navLinks = document.querySelectorAll('nav a');
+        if (section.offsetTop <= fromTop && section.offsetTop + section.offsetHeight > fromTop) {
+          navLinks.forEach(l => l.classList.remove('active'));
+          navLinks[i].classList.add('active');
+        }
+      });
+    });
+    window.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        document.querySelector('#message-section .card').style.opacity = 1;
+      }, 400);
+      setTimeout(() => {
+        document.querySelector('.love-message').style.opacity = 1;
+      }, 600);
+    });
+    const sections = document.querySelectorAll('section');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15 });
+    sections.forEach(section => {
+      observer.observe(section);
+    });
+    const canvas = document.querySelector('.fireworks-canvas');
+    const ctx = canvas.getContext('2d');
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+    let fireworks = [];
+    class Firework {
+      constructor(x, y, color) {
+        this.x = x;
+        this.y = y;
+        this.color = color;
+        this.particles = [];
+        for (let i = 0; i < 60; i++) {
+          const angle = (2 * Math.PI * i) / 60;
+          const speed = Math.random() * 2.5 + 1.7;
+          this.particles.push({
+            x: x,
+            y: y,
+            dx: Math.cos(angle) * speed,
+            dy: Math.sin(angle) * speed,
+            life: 120
+          });
+        }
+      }
+      draw() {
+        this.particles.forEach(p => {
+          ctx.fillStyle = this.color;
+          ctx.globalAlpha = Math.max(p.life/120, 0.4);
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, 2.6, 0, 2 * Math.PI);
+          ctx.fill();
+          p.x += p.dx;
+          p.y += p.dy;
+          p.dy += 0.06;
+          p.life--;
+        });
+        ctx.globalAlpha = 1;
+      }
+    }
+    function animateFireworks() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      fireworks.forEach((fw, i) => {
+        fw.draw();
+        fw.particles = fw.particles.filter(p => p.life > 0);
+        if (fw.particles.length === 0) fireworks.splice(i, 1);
+      });
+      requestAnimationFrame(animateFireworks);
+    }
+    setInterval(() => {
+      const x = Math.random() * canvas.width * 0.85 + canvas.width * 0.07;
+      const y = Math.random() * canvas.height * 0.5 + canvas.height * 0.15;
+      const color = `hsl(${Math.random()*360}, 95%, 65%)`;
+      fireworks.push(new Firework(x, y, color));
+    }, 1500);
+    animateFireworks();
+    const photoSources = [
+      "kitkatimage1st.jpg.jpg",
+      "kt 2nd.jpg.jpg",
+      "k3.jpg",
+      "kt 4.jpg.jpeg",
+      "kt 5 .jpg.jpeg"
+    ];
+    const photoCaptions = [
+      "Your smile lights up my world ❤️",
+      "Forever my favorite person 💖",
+      "Every laugh, every hug, every moment ✨",
+      "With you, life is an adventure 🌍",
+      "You are my dream come true 💫"
+    ];
+    let currentPhoto = 0;
+    function openLightbox(idx) {
+      currentPhoto = idx;
+      showPhoto();
+      document.getElementById('lightbox').classList.add('active');
+      document.getElementById('lightbox-img').focus();
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+      document.getElementById('lightbox-img').src = "";
+    }
+    function showPhoto() {
+      const img = document.getElementById('lightbox-img');
+      img.style.opacity = 0.6;
+      img.src = photoSources[currentPhoto];
+      img.onerror = () => {
+        img.src = 'images/fallback.jpg';
+        document.getElementById('lightbox-caption').textContent = 'Image not found';
+      };
+      setTimeout(() => {
+        document.getElementById('lightbox-caption').textContent = photoCaptions[currentPhoto];
+        document.getElementById('lightbox-count').textContent = `Photo ${currentPhoto+1} of ${photoSources.length}`;
+        img.style.opacity = 1;
+      }, 150);
+    }
+    function prevPhoto() {
+      currentPhoto = (currentPhoto - 1 + photoSources.length) % photoSources.length;
+      showPhoto();
+    }
+    function nextPhoto() {
+      currentPhoto = (currentPhoto + 1) % photoSources.length;
+      showPhoto();
+    }
+    document.addEventListener('keydown', function(e){
+      const box = document.getElementById('lightbox');
+      if(!box.classList.contains('active')) return;
+      if(e.key === "Escape") closeLightbox();
+      if(e.key === "ArrowLeft") prevPhoto();
+      if(e.key === "ArrowRight") nextPhoto();
+    });
+    function playVideo() {
+      const video = document.getElementById('ishika-video');
+      video.play();
+      document.querySelector('.play-overlay').style.display = 'none';
+    }
+    document.getElementById('ishika-video').addEventListener('play', () => {
+      document.querySelector('.play-overlay').style.display = 'none';
+    });
+    document.getElementById('ishika-video').addEventListener('pause', () => {
+      document.querySelector('.play-overlay').style.display = 'block';
+    });
+    function burstCelebration() {
+      for (let i = 0; i < 20; i++) {
+        setTimeout(createConfetti, i * 50);
+      }
+    }
+  </script>
+</body>
+</html>

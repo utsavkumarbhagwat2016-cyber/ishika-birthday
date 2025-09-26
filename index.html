@@ -6,7 +6,7 @@
   <title>Happy Birthday Love (Ishika)  🎉</title>
   <link rel="preload" href="images/hero.jpg" as="image">
   <link rel="preload" href="video.mp4" as="video">
-  <link href="https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:400,700|Roboto:400,700&display=swap" rel="stylesheet">
   <style>
     :root {
       --primary: #bb1e29;
@@ -202,10 +202,49 @@
       height: 150px;
       opacity: 0;
       animation: fadeInUp 1.2s ease forwards 0.5s;
-      font-family: 'Nunito', sans-serif;
-      font-size: 0.9.rem;
+      font-family: 'Roboto', sans-serif;
+      font-size: 1rem;
       color: var(--text);
-      line-height: 1.1. ;
+      line-height: 1.5;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: var(--deep) rgba(255,255,255,0.5);
+    }
+    .journey-card::-webkit-scrollbar {
+      width: 8px;
+    }
+    .journey-card::-webkit-scrollbar-track {
+      background: rgba(255,255,255,0.5);
+      border-radius: 10px;
+    }
+    .journey-card::-webkit-scrollbar-thumb {
+      background: var(--deep);
+      border-radius: 10px;
+    }
+    @media (max-width: 768px) {
+      .journey-container {
+        flex-direction: column;
+        align-items: center;
+        margin-left: 0;
+      }
+      .journey-image {
+        width: 150px;
+        height: 150px;
+      }
+      .journey-card {
+        height: auto;
+        min-height: 120px;
+        max-height: 200px;
+        font-size: 0.95rem;
+        padding: 1rem;
+      }
+    }
+    @media (max-width: 480px) {
+      .journey-card {
+        font-size: 0.9rem;
+        padding: 0.8rem;
+        max-height: 180px;
+      }
     }
     #memories {
       background: linear-gradient(120deg, #ffd5ec 0%, #e0c3fc 100%);
@@ -236,23 +275,28 @@
       top: 0;
       width: 100vw;
       height: 100vh;
-      background: rgba(58,35,82,0.92);
+      background: rgba(58,35,82,0);
       justify-content: center;
       align-items: center;
-      transition: opacity 0.4s;
+      transition: background 0.8s ease-in-out;
       flex-direction: column;
     }
     .lightbox.active {
       display: flex;
-      opacity: 1;
+      background: rgba(58,35,82,0.92);
     }
     .lightbox img {
       max-width: 80vw;
       max-height: 70vh;
       border-radius: 24px;
       box-shadow: 0 8px 40px rgba(179,157,219,0.25);
-      transition: opacity 0.5s;
+      transition: transform 0.5s ease, opacity 0.5s ease;
+      opacity: 0;
+      transform: translateY(100vh);
+    }
+    .lightbox img.active {
       opacity: 1;
+      transform: translateY(0);
     }
     .lightbox .close, .lightbox .arrow {
       position: absolute;
@@ -262,7 +306,7 @@
       font-family: 'Nunito', sans-serif;
       background: none;
       border: none;
-      z-index: 1;
+      z-index: 101;
       user-select: none;
     }
     .lightbox .close { top: 40px; right: 60px;}
@@ -291,6 +335,8 @@
     @media (max-width: 650px) {
       .lightbox .arrow.left { left: 2vw; }
       .lightbox .arrow.right { right: 2vw; }
+      .kitkat-image { width: 300px; }
+      .lightbox img { max-width: 97vw;}
     }
     #video-section {
       background: linear-gradient(110deg, #e0c3fc 0%, #ffd5ec 100%);
@@ -441,9 +487,6 @@
       .lightbox img { max-width: 97vw;}
       .footer { font-size: 1.2rem;}
       .love-message { font-size: 1rem;}
-      .journey-image { width: 150px; height: 150px; }
-      .journey-card { height: 120px; }
-      .kitkat-image { width: 300px; }
     }
   </style>
 </head>
@@ -492,8 +535,8 @@
       </div>
       <div class="journey-content">
         <div class="journey-card">I'll never forget how our story started.I was sitting across from you, Ishika, in the HAP lab. I had no idea you were even looking at me! My leg kept hitting yours under the table, first once, then twice, and a third time, until I finally realized what was happening. My rushed "sorry" 🥺 was the first thing I ever said to you. Then we met again in the college auditorium. My leg accidentally touched yours again! 🤦‍♂️ This time I just got super shy 😳. I quickly said sorry without even looking at you and rushed away. When I look back, those small, clumsy leg bumps and whispered apologies were the funny, sweet start of everything. It makes me smile to know that our first real steps toward each other were just our feet meeting under a table. 💖.</div>
-        <div class="journey-card">Our first official meet-up, after all those calls, started out so stiff, but watching Yeh Jawaani Hai Deewani soon melted the tension. I loved watching you try to hold back your laughter when I made my lame jokes. Trying to hold your hand felt so awkward at first, but making you laugh again and When I nervously joked, "You won't hit me, right?"—"Zyada kiya toh ho sakta hai"—made me pause and just look at you. That's when everything shifted. I was noticing you in a way that wasn't just friendly; I felt my heart skip a beat. Suddenly, you looked breathtakingly pretty, and I wondered if it was the light from the screen or just the simple fact that you were you. It was the way the light caught your glasses, making you shine, and I realized I didn't care that I usually didn't like girls in glasses—you just looked perfect. I was so confused by the intensity of what I was feeling! Later, over our long talk at McDonald's, the surprise spark of jealousy I felt when Abhishek called proved to me that something real and deep was beginning. That powerful moment of noticing you is sealed forever in the picture I took that day, a memory I will never, ever delete. ✨.</div>
-        <div class="journey-card">This picture perfectly captures the sweet tension of our second movie date. We went for food afterward, and the whole time we were getting to know each other more deeply—sharing laughs and opening up. In that lovely moment, I knew I had to keep it, so I quietly took out my phone to snap this image. And just like that, you became shy all over again, Ishika. That slight pull-back, the gentle look away—it’s the most endearing thing about you. You were shy because I was clicking the picture, but for me, that shyness only made you look more beautiful. This is more than just a photo; it’s a treasured memory of the day we truly started to connect, and the moment I realized how much I adore your sweet, shy heart. .</div>
+        <div class="journey-card">Our first official meet-up, after all those calls, started out so stiff, but watching Yeh Jawaani Hai Deewani soon melted the tension. I loved watching you try to hold back your laughter when I made my lame jokes. Trying to hold your hand felt so awkward at first, but making you laugh again and When I nervously joked, "You won't hit me, right?"—"Zyada kiya toh ho sakta hai"—made me pause and just look at you. That's when everything shifted. I was noticing you in a way that wasn't just friendly; I felt my heart skip a beat. Suddenly, you looked breathtakingly pretty, and I wondered if it was the light from the screen or just the simple fact that you was you. It was the way the light caught your glasses, making you shine, and I realized I didn't care that I usually didn't like girls in glasses—you just looked perfect. I was so confused by the intensity of what I was feeling! Later, over our long talk at McDonald's, the surprise spark of jealousy I felt when Abhishek called proved to me that something real and deep was beginning. That powerful moment of noticing you is sealed forever in the picture I took that day, a memory I will never, ever delete. ✨.</div>
+        <div class="journey-card">This picture perfectly captures the sweet tension of our second movie date. We went for food afterward, and the whole time we were getting to know each other more deeply—sharing laughs and opening up. In that lovely moment, I knew I had to keep it, so I quietly took out my phone to snap this image. And just like that, you became shy all over again, Ishika. That slight pull-back, the gentle look away—it’s the most endearing thing about you. You were shy because I was clicking the picture, but for me, that shyness only made you look more beautiful. This is more than just a photo; it’s a treasured memory of the day we truly started to connect, and the moment I realized how much I adore your sweet, shy heart.</div>
         <div class="journey-card">This place, right here, is where our college story truly came alive. It's not just a spot on campus; it’s the corner where we sat a hundred times, letting the hours slip away. It's where we talked about everything and nothing, where I would watch you, Ishika, still shy in a way I absolutely adore, even while laughing at one of my silly jokes. For me, it was always a chance to share the thoughts and heart-chats that I couldn't share with anyone else. I cherish the memory of your quiet shyness contrasting with my need to tease and make you smile. Every conversation we had there, every walk from the building to the ground and back, is one of the bestest memories I’ll ever have. Sometimes, I just close my eyes and wish I could rewind time to that exact moment, just to sit there with you again, sharing everything, laughing with you, and holding onto that feeling forever. That corner is where I first truly knew you, and it’s a feeling I’ll always carry. 💖.</div>
         <div class="journey-card">This picture from Asita Park marks a truly special day—our first time meeting in Delhi! I remember that park, DDA Park, as a little oasis where we could finally talk for hours without a single interruption. We just laughed, sharing all our memories from the very beginning, letting our presence simply fill the space around us. We sat there, just holding hands, enjoying the view like it was our own personal picnic spot. Even though you kept saying, "Bhai, garmi bahut hai," your willingness to stay by my side meant the world to me. And of course, there were the calls from aunty ji, and your classic lines, "Aree, agaye, bas nikal gaye, pohoch gaye!" as we tried to squeeze out every last minute together. It’s a memory I hold so dear. I truly wish we could visit that park again someday, Ishika, and just sit exactly like this, lost in conversation and each other's company. ✨.</div>
         <div class="journey-card">These festival days weren't just events; they were the precious days where our bond deepened under the rush of joy and shared success. I remember the immense pride I felt watching you take your prizes, and the raw, honest moment we ended up crying together, facing the difficult reality of the distance ahead. Every shared meal, every glance, every picture we clicked became an intense memory, a deliberate attempt to capture the feeling of being completely and utterly present with you. More than anything, I long to step back into that time: to spend a full day with you again, to watch you shine, to share those tears and that laughter, and to just make memories with you again—memories that will forever define the best part of my college life. That feeling of closeness, Ishika, I hold it in my heart.💝</div>
@@ -700,37 +743,51 @@ With all my love, always and forever,
       "You are my dream come true 💫"
     ];
     let currentPhoto = 0;
+    let isAnimating = false;
     function openLightbox(idx) {
+      if (isAnimating) return;
+      isAnimating = true;
       currentPhoto = idx;
+      const lightbox = document.getElementById('lightbox');
+      lightbox.classList.add('active');
       showPhoto();
-      document.getElementById('lightbox').classList.add('active');
+      isAnimating = false;
       document.getElementById('lightbox-img').focus();
     }
     function closeLightbox() {
+      isAnimating = false;
       document.getElementById('lightbox').classList.remove('active');
       document.getElementById('lightbox-img').src = "";
+      document.getElementById('lightbox-img').classList.remove('active');
     }
     function showPhoto() {
       const img = document.getElementById('lightbox-img');
-      img.style.opacity = 0.6;
       img.src = photoSources[currentPhoto];
+      img.classList.add('active');
       img.onerror = () => {
         img.src = 'images/fallback.jpg';
         document.getElementById('lightbox-caption').textContent = 'Image not found';
       };
-      setTimeout(() => {
-        document.getElementById('lightbox-caption').textContent = photoCaptions[currentPhoto];
-        document.getElementById('lightbox-count').textContent = `Photo ${currentPhoto+1} of ${photoSources.length}`;
-        img.style.opacity = 1;
-      }, 150);
+      document.getElementById('lightbox-caption').textContent = photoCaptions[currentPhoto];
+      document.getElementById('lightbox-count').textContent = `Photo ${currentPhoto+1} of ${photoSources.length}`;
     }
     function prevPhoto() {
+      if (isAnimating) return;
       currentPhoto = (currentPhoto - 1 + photoSources.length) % photoSources.length;
-      showPhoto();
+      const img = document.getElementById('lightbox-img');
+      img.classList.remove('active');
+      setTimeout(() => {
+        showPhoto();
+      }, 300);
     }
     function nextPhoto() {
+      if (isAnimating) return;
       currentPhoto = (currentPhoto + 1) % photoSources.length;
-      showPhoto();
+      const img = document.getElementById('lightbox-img');
+      img.classList.remove('active');
+      setTimeout(() => {
+        showPhoto();
+      }, 300);
     }
     document.addEventListener('keydown', function(e){
       const box = document.getElementById('lightbox');
@@ -757,9 +814,4 @@ With all my love, always and forever,
     }
   </script>
 </body>
-
 </html>
-
-
-
-
